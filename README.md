@@ -1,8 +1,9 @@
-# rascaloid-ui
-
 ```console
-git clone https://github.com/team-cerezo/rascaloid-ui.git
-cd rascaloid-ui
-yarn install
-yarn start
+npm install
+npm start
 ```
+
+うらがみさんの土台に加えて
+↓の２つのパッケージ追加してます
+semantic-ui-react
+semantic-ui-css
