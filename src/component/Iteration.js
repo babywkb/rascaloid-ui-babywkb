@@ -14,7 +14,7 @@ import {
 import 'semantic-ui-css/semantic.min.css'
 import ModalModal from './ModalModal'
 
-const ActionShowStories = ({story}) => (
+const ActionShowStories = ({story,task}) => (
     <Segment>
         <List divided relaxed>
             {story.filter(story =>story.taskCondition==='doing').map((story) => (
@@ -43,6 +43,7 @@ const ActionShowStories = ({story}) => (
                                                 </div>
                                             </Card.Content>
                                         </Card>
+                                        
                                     </Card.Group>
                                 </Grid.Column>
                                 <Grid.Column>
@@ -57,7 +58,6 @@ const ActionShowStories = ({story}) => (
                 </List.Item>
             ))}
         </List>
-
     </Segment>
 )
 
@@ -67,7 +67,7 @@ export default({projectId, iterationId, story}) => (
             <Icon name='wait' size='large'/>
             Iteration {iterationId}
             (Project {projectId})</h1>
-        <ActionShowStories story={story}/>
+        <ActionShowStories story={story} task=/>
 
         <ul>
             <li>TODO ストーリーとタスクのデータを保持するStoreを作る</li>
