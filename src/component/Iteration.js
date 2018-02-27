@@ -14,10 +14,34 @@ import {
 import 'semantic-ui-css/semantic.min.css'
 import ModalModal from './ModalModal'
 
-const ActionShowStories = ({story,task}) => (
+const TaskCard = ({task,condition}) => (
+    <Card.Group>
+    {task.filter((task) => task.condition === condition).map(task => (
+    <Card key={task.taskId}>
+        <Card.Content>
+            <Card.Header>
+                TaskTitle{task.title}
+            </Card.Header>
+            <Card.Meta></Card.Meta>
+            <Card.Description>
+                {task.description}
+            </Card.Description>
+        </Card.Content>
+        <Card.Content extra>
+            <div className='ui two buttons'>
+                <ModalModal/>
+                <Button color='red'>削除</Button>
+            </div>
+        </Card.Content>
+    </Card>
+    ))}
+</Card.Group>
+)
+
+const ActionShowStories = ({story}) => (
     <Segment>
         <List divided relaxed>
-            {story.filter(story =>story.taskCondition==='doing').map((story) => (
+            {story.map((story) => (
                 <List.Item key={story.storyId}>
                     <List.Content>
                         <List.Header>StoryTitle{story.title}</List.Header>
@@ -25,32 +49,15 @@ const ActionShowStories = ({story,task}) => (
                             <Grid.Row>
                                 <Grid.Column>
                                     TODO
-                                    <Card.Group>
-                                        <Card>
-                                            <Card.Content>
-                                                <Card.Header>
-                                                    TaskTitle{story.task}
-                                                </Card.Header>
-                                                <Card.Meta></Card.Meta>
-                                                <Card.Description>
-                                                    {story.taskDescription}
-                                                </Card.Description>
-                                            </Card.Content>
-                                            <Card.Content extra>
-                                                <div className='ui two buttons'>
-                                                    <ModalModal/>
-                                                    <Button color='red'>削除</Button>
-                                                </div>
-                                            </Card.Content>
-                                        </Card>
-                                        
-                                    </Card.Group>
+                                    <TaskCard task={story.task} condition='todo'/>
                                 </Grid.Column>
                                 <Grid.Column>
                                     DOING
+                                    <TaskCard task={story.task} condition='doing'/>
                                 </Grid.Column>
                                 <Grid.Column>
                                     DONE
+                                    <TaskCard task={story.task} condition='done'/>
                                 </Grid.Column>
                             </Grid.Row>
                         </Grid>
@@ -67,7 +74,7 @@ export default({projectId, iterationId, story}) => (
             <Icon name='wait' size='large'/>
             Iteration {iterationId}
             (Project {projectId})</h1>
-        <ActionShowStories story={story} task=/>
+        <ActionShowStories story={story} />
 
         <ul>
             <li>TODO ストーリーとタスクのデータを保持するStoreを作る</li>
