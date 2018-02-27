@@ -1,8 +1,8 @@
 import React from 'react'
-import {Button, Header, Modal, Checkbox, Form} from 'semantic-ui-react'
+import {Button, Header, Modal, Form} from 'semantic-ui-react'
 
 const ModalModal = () => (
-  <Modal trigger={< Button color='green'> タスクを追加 </ Button>}>
+  <Modal trigger={< Button color='green'> 編集 </ Button>}>
     <Modal.Header>add Your Task</Modal.Header>
     <Modal.Content >
       <Modal.Description>

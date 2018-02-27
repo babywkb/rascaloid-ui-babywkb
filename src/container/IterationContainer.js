@@ -3,7 +3,6 @@ import { Container } from 'flux/utils';
 import Iteration from '../component/Iteration';
 import DummyStore from '../store/DummyStore';
 import StoryStore from '../store/StoryStore';
-import IterationStore from '../store/IterationStore';
 
 const getStores = () => [DummyStore];
 

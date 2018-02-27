@@ -9,7 +9,7 @@ const ActionShowIterates = ({ iteration,projectId }) => (
     <List divided relaxed>
         {iteration.map((itr) => (
             <List.Item key={itr.iterationId}>
-                <List.Icon name='tasks' size='large' verticalAlign='middle' />
+                <List.Icon name='wait' size='large' verticalAlign='middle' />
                 <List.Content>
                     <List.Header as='a'><Link to={'/projects/' + projectId + '/iterations/' + itr.iterationId}>IterationNo.{itr.iterationId}</ Link></List.Header>
                     <List.Description as='a'>日付出したい</List.Description>
