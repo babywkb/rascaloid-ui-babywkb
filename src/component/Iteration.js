@@ -17,7 +17,7 @@ import ModalModal from './ModalModal'
 const ActionShowStories = ({story}) => (
     <Segment>
         <List divided relaxed>
-            {story.map((story) => (
+            {story.filter(story =>story.taskCondition==='doing').map((story) => (
                 <List.Item key={story.storyId}>
                     <List.Content>
                         <List.Header>StoryTitle{story.title}</List.Header>
