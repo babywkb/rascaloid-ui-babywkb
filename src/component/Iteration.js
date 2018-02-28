@@ -5,14 +5,10 @@ import {
     Card,
     Icon,
     Grid,
-    Divider,
-    Segment,
-    Table,
-    Label,
-    Menu
+    Segment
 } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
-import ModalModal from './ModalModal'
+import TaskEditor from './TaskEditor'
 
 const TaskCard = ({task,condition}) => (
     <Card.Group>
@@ -29,7 +25,7 @@ const TaskCard = ({task,condition}) => (
         </Card.Content>
         <Card.Content extra>
             <div className='ui two buttons'>
-                <ModalModal/>
+                <TaskEditor/>
                 <Button color='red'>削除</Button>
             </div>
         </Card.Content>

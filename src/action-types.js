@@ -1,3 +1,3 @@
 export default {
-    SHOWPJDATA: Symbol()
+    UPDATE_CONTENT: Symbol()
 };

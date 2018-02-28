@@ -1,7 +1,7 @@
 import React from 'react'
 import {Button, Header, Modal, Form} from 'semantic-ui-react'
 
-const ModalModal = () => (
+const TaskEditor = (task) => (
   <Modal trigger={< Button color='green'> 編集 </ Button>}>
     <Modal.Header>add Your Task</Modal.Header>
     <Modal.Content >
@@ -11,12 +11,9 @@ const ModalModal = () => (
       </Modal.Description>
       <Form>
           <Form.Field>
-            <label>First Name</label>
-            <input placeholder='First Name'/>
-          </Form.Field>
-          <Form.Field>
-            <label>Last Name</label>
-            <input placeholder='Last Name'/>
+            <label>タスク詳細</label>
+            <input placeholder='First Name' value={task.description}
+                onChange={updateContent} onKeyPress={tryAddTodo} />
           </Form.Field>
           <Button type='submit'>Submit</Button>
         </Form>
@@ -24,4 +21,4 @@ const ModalModal = () => (
   </Modal>
 )
 
-export default ModalModal
+export default TaskEditor
