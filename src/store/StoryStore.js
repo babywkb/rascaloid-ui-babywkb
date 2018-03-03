@@ -37,11 +37,11 @@ class StoryStore extends ReduceStore {
         switch (type) {
             case ActionTypes.UPDATE_CONTENT:
                 {
-                    const {task} = payload;
-
+                    const {description} = payload;
+                    return description;
                 }
-            default:
-                return state;
+                default:
+                    return state;
         }
     }
 }
