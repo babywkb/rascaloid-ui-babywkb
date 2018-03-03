@@ -16,18 +16,6 @@ import {updateContent} from '../actions'
 
 const TaskEditor = ({task}) => {
     const description = task.description;
-    const checkbox = [
-        {
-            key: 'm',
-            text: 'Male',
-            value: 'male'
-        }, {
-            key: 'f',
-            text: 'Female',
-            value: 'female'
-        }
-    ];
-    const condition = task.condition;
     return (
         <Modal trigger={< Button color = 'green' > 詳細 </Button>}>
             <Modal.Header>add Your Task</Modal.Header>

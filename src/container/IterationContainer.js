@@ -4,7 +4,7 @@ import Iteration from '../component/Iteration';
 import DummyStore from '../store/DummyStore';
 import StoryStore from '../store/StoryStore';
 
-const getStores = () => [DummyStore];
+const getStores = () => [DummyStore,StoryStore];
 
 const calculateState = (prevState, { match: { params: { projectId, iterationId } } }) => {
     return {

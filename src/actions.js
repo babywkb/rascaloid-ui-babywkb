@@ -4,6 +4,7 @@ import ActionTypes from './action-types';
 
 export const updateContent = event => {
     const description = event.target.value;
+    console.log(description);
     RascaloidDispatcher.dispatch({
         type: ActionTypes.UPDATE_CONTENT,
         payload: { description }
