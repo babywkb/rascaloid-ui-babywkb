@@ -15,7 +15,6 @@ import 'semantic-ui-css/semantic.min.css'
 import {updateContent} from '../actions'
 
 const TaskEditor = ({task}) => {
-    const description = task.description;
     return (
         <Modal trigger={< Button color = 'green' > 詳細 </Button>}>
             <Modal.Header>add Your Task</Modal.Header>
@@ -26,7 +25,7 @@ const TaskEditor = ({task}) => {
                     <Form>
                         <Form.Field>
                             <label>タスク詳細</label>
-                            <input value={description} onChange={updateContent}/>
+                            <input value={task.description} onChange={updateContent}/>
                         </Form.Field>
                         <Form.Field>
                             <Checkbox radio label='Choose this' name='checkboxRadioGroup' value='this'/>
@@ -42,9 +41,9 @@ const TaskEditor = ({task}) => {
     )
 }
 
-const TaskCard = ({task, condition}) => (
+const TaskCard = ({taskList, condition}) => (
     <Card.Group>
-        {task.filter((task) => task.condition === condition).map(task => (
+        {taskList.filter((task) => task.condition === condition).map(task => (
             <Card key={task.taskId}>
                 <Card.Content>
                     <Card.Header>
@@ -66,10 +65,10 @@ const TaskCard = ({task, condition}) => (
     </Card.Group>
 )
 
-const ActionShowStories = ({story}) => (
+const ActionShowStories = ({storyList}) => (
     <Segment>
         <List divided relaxed>
-            {story.map((story) => (
+            {storyList.map((story) => (
                 <List.Item key={story.storyId}>
                     <List.Content>
                         <List.Header>StoryTitle{story.title}</List.Header>
@@ -77,15 +76,15 @@ const ActionShowStories = ({story}) => (
                             <Grid.Row>
                                 <Grid.Column>
                                     TODO
-                                    <TaskCard task={story.task} condition='todo'/>
+                                    <TaskCard taskList={story.taskList} condition='todo'/>
                                 </Grid.Column>
                                 <Grid.Column>
                                     DOING
-                                    <TaskCard task={story.task} condition='doing'/>
+                                    <TaskCard taskList={story.taskList} condition='doing'/>
                                 </Grid.Column>
                                 <Grid.Column>
                                     DONE
-                                    <TaskCard task={story.task} condition='done'/>
+                                    <TaskCard taskList={story.taskList} condition='done'/>
                                 </Grid.Column>
                             </Grid.Row>
                         </Grid>
@@ -96,13 +95,13 @@ const ActionShowStories = ({story}) => (
     </Segment>
 )
 
-export default({projectId, iterationId, story}) => (
+export default({projectId, iterationId, storyList}) => (
     <div>
         <h1>
             <Icon name='wait' size='large'/>
             Iteration {iterationId}
             (Project {projectId})</h1>
-        <ActionShowStories story={story}/>
+        <ActionShowStories storyList={storyList}/>
 
         <ul>
             <li>TODO ストーリーとタスクのデータを保持するStoreを作る</li>

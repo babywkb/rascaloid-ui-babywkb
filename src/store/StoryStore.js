@@ -1,22 +1,25 @@
 import {ReduceStore} from 'flux/utils';
 import RascaloidDispatcher from '../dispatcher';
 import ActionTypes from '../action-types';
-import {Story, Task, TaskList} from '../models';
+import {Story, Task, TaskList, StoryList} from '../models';
 
-//そもそも要るの？？
 class StoryStore extends ReduceStore {
     getInitialState() {
         //たぶんここもサーバサイドとやり取りしなきゃなと思う
-        return Story.create('Storyタイトル１', TaskList.empty().add(Task.create('Taskタイトル１')).add(Task.create('Taskタイトル２')));
+        return StoryList
+            .empty()
+            .add(Story.create('Storyタイトル１', '詳細初期値', 
+                TaskList
+                .empty()
+                .add(Task.create('Taskタイトル１')).add(Task.create('Taskタイトル２'))));
     }
     reduce(state, {type, payload}) {
         switch (type) {
-            case ActionTypes.UPDATE_CONTENT:
+            case ActionTypes.UPDATE_TASK_CONTENT:
                 {
                     const {storyId, task, description} = payload;
-
                     console.log(description);
-                    return description;
+                    return state.setDescription(description);
                 }
             default:
                 return state;

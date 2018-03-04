@@ -82,15 +82,15 @@ class StoryList {
             if (story.storyId === storyId) {
                 return story.setTitle(title);
             }
-            return task;
+            return story;
         }));
     }
     setDescription(storyId, description) {
         return new StoryList(this.list.map(story => {
             if (story.storyId === storyId) {
-                return story.setTitle(title);
+                return story.setDescription(description);
             }
-            return task;
+            return story;
         }));
     }
     setTaskList(storyId, taskList) {
@@ -98,9 +98,9 @@ class StoryList {
             if (story.storyId === storyId) {
                 return story.setTaskList(taskList);
             }
-            return task;
+            return story;
         }));
     }
 }
 
-export {Task,TaskList,Story}
+export {Task,TaskList,Story,StoryList}
