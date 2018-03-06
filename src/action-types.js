@@ -1,3 +1,3 @@
 export default {
-    UPDATE_CONTENT: Symbol()
+    UPDATE_TASK_DESCRIPTION: Symbol()
 };

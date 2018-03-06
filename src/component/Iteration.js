@@ -68,7 +68,7 @@ const TaskCard = ({taskList, condition}) => (
 const ActionShowStories = ({storyList}) => (
     <Segment>
         <List divided relaxed>
-            {storyList.map((story) => (
+            {storyList.list.map((story) => (
                 <List.Item key={story.storyId}>
                     <List.Content>
                         <List.Header>StoryTitle{story.title}</List.Header>
@@ -76,15 +76,15 @@ const ActionShowStories = ({storyList}) => (
                             <Grid.Row>
                                 <Grid.Column>
                                     TODO
-                                    <TaskCard taskList={story.taskList} condition='todo'/>
+                                    <TaskCard taskList={story.taskList.list} condition='todo'/>
                                 </Grid.Column>
                                 <Grid.Column>
                                     DOING
-                                    <TaskCard taskList={story.taskList} condition='doing'/>
+                                    <TaskCard taskList={story.taskList.list} condition='doing'/>
                                 </Grid.Column>
                                 <Grid.Column>
                                     DONE
-                                    <TaskCard taskList={story.taskList} condition='done'/>
+                                    <TaskCard taskList={story.taskList.list} condition='done'/>
                                 </Grid.Column>
                             </Grid.Row>
                         </Grid>

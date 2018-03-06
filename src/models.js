@@ -54,7 +54,7 @@ class Story {
     }
     static idGenerator = 0;
     static create(title,description,taskList) {
-        return new Task(++Story.idGenerator, title, description, taskList);
+        return new Story(++Story.idGenerator, title, description, taskList);
     }
     setTitle(title) {
         return new Story(this.storyId,title, this.description, this.taskList);

@@ -5,13 +5,11 @@ import {Story, Task, TaskList, StoryList} from '../models';
 
 class StoryStore extends ReduceStore {
     getInitialState() {
-        //たぶんここもサーバサイドとやり取りしなきゃなと思う
-        return StoryList
-            .empty()
-            .add(Story.create('Storyタイトル１', '詳細初期値', 
-                TaskList
-                .empty()
-                .add(Task.create('Taskタイトル１')).add(Task.create('Taskタイトル２'))));
+        return StoryList.empty().add(
+            Story.create('Storyタイトル１', '詳細初期値', 
+                TaskList.empty()
+                .add(Task.create('Taskタイトル１'))
+                .add(Task.create('Taskタイトル２'))));
     }
     reduce(state, {type, payload}) {
         switch (type) {

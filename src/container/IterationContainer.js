@@ -8,11 +8,9 @@ const getStores = () => [DummyStore,StoryStore];
 
 const calculateState = (prevState, { match: { params: { projectId, iterationId } } }) => {
     return {
-        dummy: DummyStore.getState(),
         projectId,
         iterationId,
-        story: StoryStore.getState(),
-        
+        storyList: StoryStore.getState(),
     };
 };
 
