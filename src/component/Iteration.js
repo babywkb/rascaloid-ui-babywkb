@@ -14,18 +14,18 @@ import {
 import 'semantic-ui-css/semantic.min.css'
 import {updateContent} from '../actions'
 
-const TaskEditor = ({task}) => {
+const TaskEditor = ({storyList, story, task}) => {
     return (
         <Modal trigger={< Button color = 'green' > 詳細 </Button>}>
-            <Modal.Header>add Your Task</Modal.Header>
+            <Modal.Header>edit Your Task</Modal.Header>
             <Modal.Content>
                 <Modal.Description>
                     <Header>タスク編集画面</Header>
-                    <p>{task.descriptio}</p>
+                    <p>{task.description}</p>
                     <Form>
                         <Form.Field>
                             <label>タスク詳細</label>
-                            <input value={task.description} onChange={updateContent}/>
+                            <input value={task.description} storyList={storyList} story={story} task={task} taskId onChange={updateContent}/>
                         </Form.Field>
                         <Form.Field>
                             <Checkbox radio label='Choose this' name='checkboxRadioGroup' value='this'/>
@@ -41,9 +41,9 @@ const TaskEditor = ({task}) => {
     )
 }
 
-const TaskCard = ({taskList, condition}) => (
+const TaskCard = ({storyList, story, condition}) => (
     <Card.Group>
-        {taskList.filter((task) => task.condition === condition).map(task => (
+        {story.taskList.list.filter((task) => task.condition === condition).map(task => (
             <Card key={task.taskId}>
                 <Card.Content>
                     <Card.Header>
@@ -56,7 +56,7 @@ const TaskCard = ({taskList, condition}) => (
                 </Card.Content>
                 <Card.Content extra>
                     <div className='ui two buttons'>
-                        <TaskEditor task={task}/>
+                        <TaskEditor task={task} storyList={storyList} story={story}/>
                         <Button color='red'>削除</Button>
                     </div>
                 </Card.Content>
@@ -76,15 +76,15 @@ const ActionShowStories = ({storyList}) => (
                             <Grid.Row>
                                 <Grid.Column>
                                     TODO
-                                    <TaskCard taskList={story.taskList.list} condition='todo'/>
+                                    <TaskCard storyList={storyList} story={story} condition='todo'/>
                                 </Grid.Column>
                                 <Grid.Column>
                                     DOING
-                                    <TaskCard taskList={story.taskList.list} condition='doing'/>
+                                    <TaskCard storyList={storyList} story={story} condition='doing'/>
                                 </Grid.Column>
                                 <Grid.Column>
                                     DONE
-                                    <TaskCard taskList={story.taskList.list} condition='done'/>
+                                    <TaskCard storyList={storyList} story={story} condition='done'/>
                                 </Grid.Column>
                             </Grid.Row>
                         </Grid>

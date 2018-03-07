@@ -13,9 +13,9 @@ class StoryStore extends ReduceStore {
     }
     reduce(state, {type, payload}) {
         switch (type) {
-            case ActionTypes.UPDATE_TASK_CONTENT:
+            case ActionTypes.UPDATE_TASK_DESCRIPTION:
                 {
-                    const {storyId, task, description} = payload;
+                    const {description} = payload;
                     console.log(description);
                     return state.setDescription(description);
                 }

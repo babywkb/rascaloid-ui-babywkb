@@ -4,9 +4,10 @@ import ActionTypes from './action-types';
 
 export const updateContent = event => {
     const description = event.target.value;
+    const story = event.target.story;
     console.log(description);
     RascaloidDispatcher.dispatch({
         type: ActionTypes.UPDATE_TASK_DESCRIPTION,
-        payload: { description }
+        payload: { description,story }
     });
 };

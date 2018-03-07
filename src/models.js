@@ -27,7 +27,7 @@ class TaskList {
     add(task) {
         return new TaskList([task, ...this.list]);
     }
-    setCondition(taskId, condition) {
+    setTaskCondition(taskId, condition) {
         return new TaskList(this.list.map(task => {
             if (task.taskId === taskId) {
                 return task.setCondition(condition);
@@ -35,7 +35,7 @@ class TaskList {
             return task;
         }));
     }
-    setDescription(taskId, description) {
+    setTaskDescription(taskId, description) {
         return new TaskList(this.list.map(task => {
             if (task.taskId === taskId) {
                 return task.setDescription(description);
@@ -77,7 +77,7 @@ class StoryList {
     add(story) {
         return new StoryList([story, ...this.list]);
     }
-    setTitle(storyId, title) {
+    setStoryTitle(storyId, title) {
         return new StoryList(this.list.map(story => {
             if (story.storyId === storyId) {
                 return story.setTitle(title);
@@ -85,7 +85,7 @@ class StoryList {
             return story;
         }));
     }
-    setDescription(storyId, description) {
+    setStoryDescription(storyId, description) {
         return new StoryList(this.list.map(story => {
             if (story.storyId === storyId) {
                 return story.setDescription(description);
@@ -93,7 +93,7 @@ class StoryList {
             return story;
         }));
     }
-    setTaskList(storyId, taskList) {
+    setStoryTaskList(storyId, taskList) {
         return new StoryList(this.list.map(story => {
             if (story.storyId === storyId) {
                 return story.setTaskList(taskList);
