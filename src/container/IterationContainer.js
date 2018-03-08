@@ -2,15 +2,15 @@ import { Container } from 'flux/utils';
 
 import Iteration from '../component/Iteration';
 import DummyStore from '../store/DummyStore';
-import StoryStore from '../store/StoryStore';
+import StoryListStore from '../store/StoryListStore';
 
-const getStores = () => [DummyStore,StoryStore];
+const getStores = () => [DummyStore,StoryListStore];
 
 const calculateState = (prevState, { match: { params: { projectId, iterationId } } }) => {
     return {
         projectId,
         iterationId,
-        storyList: StoryStore.getState(),
+        storyList: StoryListStore.getState(),
     };
 };
 

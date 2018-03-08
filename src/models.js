@@ -12,8 +12,8 @@ class Task {
         return new Task(this.taskId,this.condition,this.title,description);
     }
     static idGenerator = 0;
-    static create(title) {
-        return new Task(++Task.idGenerator, 'todo', title, '初期詳細内容');
+    static create(title,description) {
+        return new Task(++Task.idGenerator, 'todo', title, description);
     }
 }
 
@@ -46,24 +46,20 @@ class TaskList {
 }
 
 class Story {
-    constructor(storyId, title, description, taskList) {
+    constructor(storyId, title, taskList) {
         this.storyId = storyId;
         this.title = title;
-        this.description = description;
         this.taskList = taskList;
     }
     static idGenerator = 0;
-    static create(title,description,taskList) {
-        return new Story(++Story.idGenerator, title, description, taskList);
+    static create(title,taskList) {
+        return new Story(++Story.idGenerator, title, taskList);
     }
     setTitle(title) {
-        return new Story(this.storyId,title, this.description, this.taskList);
-    }
-    setDescription(description) {
-        return new Story(this.storyId, this.title, description, this.taskList)
+        return new Story(this.storyId,title, this.taskList);
     }
     setTaskList(taskList) {
-        return new Story(this.id, this.title, this.description, taskList);
+        return new Story(this.id, this.title, taskList);
     }
 }
 
@@ -81,14 +77,6 @@ class StoryList {
         return new StoryList(this.list.map(story => {
             if (story.storyId === storyId) {
                 return story.setTitle(title);
-            }
-            return story;
-        }));
-    }
-    setStoryDescription(storyId, description) {
-        return new StoryList(this.list.map(story => {
-            if (story.storyId === storyId) {
-                return story.setDescription(description);
             }
             return story;
         }));

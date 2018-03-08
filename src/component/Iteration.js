@@ -12,7 +12,7 @@ import {
     Checkbox
 } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
-import {updateContent} from '../actions'
+import {updateTaskDescription} from '../actions'
 
 const TaskEditor = ({storyList, story, task}) => {
     return (
@@ -25,7 +25,8 @@ const TaskEditor = ({storyList, story, task}) => {
                     <Form>
                         <Form.Field>
                             <label>タスク詳細</label>
-                            <input value={task.description} storyList={storyList} story={story} task={task} taskId onChange={updateContent}/>
+                            <input value={task.description} storyList={storyList} story={story} task={task} 
+                            onChange={event => updateTaskDescription(story,task, event.target.value)}/>
                         </Form.Field>
                         <Form.Field>
                             <Checkbox radio label='Choose this' name='checkboxRadioGroup' value='this'/>
@@ -41,7 +42,7 @@ const TaskEditor = ({storyList, story, task}) => {
     )
 }
 
-const TaskCard = ({storyList, story, condition}) => (
+const TaskComponent = ({storyList, story, condition}) => (
     <Card.Group>
         {story.taskList.list.filter((task) => task.condition === condition).map(task => (
             <Card key={task.taskId}>
@@ -65,26 +66,26 @@ const TaskCard = ({storyList, story, condition}) => (
     </Card.Group>
 )
 
-const ActionShowStories = ({storyList}) => (
+const StoryComponent = ({storyList}) => (
     <Segment>
         <List divided relaxed>
             {storyList.list.map((story) => (
                 <List.Item key={story.storyId}>
                     <List.Content>
-                        <List.Header>StoryTitle{story.title}</List.Header>
+                        <List.Header>StoryTitle【{story.title}】</List.Header>
                         <Grid columns={3} divided>
                             <Grid.Row>
                                 <Grid.Column>
                                     TODO
-                                    <TaskCard storyList={storyList} story={story} condition='todo'/>
+                                    <TaskComponent storyList={storyList} story={story} condition='todo'/>
                                 </Grid.Column>
                                 <Grid.Column>
                                     DOING
-                                    <TaskCard storyList={storyList} story={story} condition='doing'/>
+                                    <TaskComponent storyList={storyList} story={story} condition='doing'/>
                                 </Grid.Column>
                                 <Grid.Column>
                                     DONE
-                                    <TaskCard storyList={storyList} story={story} condition='done'/>
+                                    <TaskComponent storyList={storyList} story={story} condition='done'/>
                                 </Grid.Column>
                             </Grid.Row>
                         </Grid>
@@ -101,7 +102,7 @@ export default({projectId, iterationId, storyList}) => (
             <Icon name='wait' size='large'/>
             Iteration {iterationId}
             (Project {projectId})</h1>
-        <ActionShowStories storyList={storyList}/>
+        <StoryComponent storyList={storyList}/>
 
         <ul>
             <li>TODO ストーリーとタスクのデータを保持するStoreを作る</li>

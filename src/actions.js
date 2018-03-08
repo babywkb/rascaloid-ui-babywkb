@@ -1,13 +1,10 @@
 import RascaloidDispatcher from './dispatcher';
 import ActionTypes from './action-types';
-//import { storyStore } from './store/StoryStore';
+import { storyListStore } from './store/StoryListStore';
 
-export const updateContent = event => {
-    const description = event.target.value;
-    const story = event.target.story;
-    console.log(description);
+export const updateTaskDescription = (story,task,taskDescription) => {
     RascaloidDispatcher.dispatch({
-        type: ActionTypes.UPDATE_TASK_DESCRIPTION,
-        payload: { description,story }
+        type: ActionTypes.SET_DESCRIPTION,
+        payload: {story,task,taskDescription}
     });
 };
