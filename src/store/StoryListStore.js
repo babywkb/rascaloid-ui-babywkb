@@ -16,8 +16,10 @@ class StoryListStore extends ReduceStore {
             case ActionTypes.SET_DESCRIPTION:
                 {
                     const {story,task,taskDescription} = payload;
-                    const taskList = story.taskList.setTaskDescription(task.taskId ,taskDescription);
-                    return state.setStoryTaskList(story.storyId,taskList);
+                    const storyId = story.storyId
+                    const taskId = task.taskId 
+                    const taskList = story.taskList.setTaskDescription(taskId ,taskDescription);
+                    return state.setStoryTaskList(storyId,taskList);
                 }
             default:
                 return state;

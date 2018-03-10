@@ -58,7 +58,6 @@ const TaskComponent = ({storyList, story, condition}) => (
                 <Card.Content extra>
                     <div className='ui two buttons'>
                         <TaskEditor task={task} storyList={storyList} story={story}/>
-                        <Button color='red'>削除</Button>
                     </div>
                 </Card.Content>
             </Card>
