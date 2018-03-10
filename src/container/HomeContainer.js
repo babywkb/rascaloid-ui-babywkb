@@ -1,14 +1,12 @@
 import { Container } from 'flux/utils';
 
 import Home from '../component/Home';
-import DummyStore from '../store/DummyStore';
 import ProjectStore from '../store/ProjectStore';
 
-const getStores = () => [DummyStore,ProjectStore];
+const getStores = () => [ProjectStore];
 
 const calculateState = () => {
     return {
-        dummy: DummyStore.getState(),
         project: ProjectStore.getState()
     };
 };

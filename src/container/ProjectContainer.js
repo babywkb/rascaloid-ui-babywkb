@@ -1,14 +1,12 @@
 import { Container } from 'flux/utils';
 
 import Project from '../component/Project';
-import DummyStore from '../store/DummyStore';
 import IterationStore from '../store/IterationStore';
 
-const getStores = () => [DummyStore,IterationStore];
+const getStores = () => [IterationStore];
 
 const calculateState = (prevState, { match: { params: { projectId } } }) => {
     return {
-        dummy: DummyStore.getState(),
         projectId,
         iteration: IterationStore.getState()
     };
