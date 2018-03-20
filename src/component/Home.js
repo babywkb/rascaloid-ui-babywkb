@@ -21,7 +21,7 @@ export default class Home extends React.Component {
     componentDidMount() {
         fetchTitle();
     }
-    
+
     render() {
         return(
                 <List divided relaxed>
