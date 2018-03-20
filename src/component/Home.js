@@ -1,34 +1,41 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import { List } from 'semantic-ui-react'
-import Header from './Header'
 import 'semantic-ui-css/semantic.min.css'
+import ProjectStore from '../store/ProjectStore';
+import {fetchTitle} from '../actions'
 
 
-const ActionShowProjects = ({ project }) => {
-    return(
-        <List divided relaxed>
-            {project.map((pj) => (
-                <List.Item key={pj.pjId}>
-                    <List.Icon name='tasks' size='large' verticalAlign='middle' />
-                    <List.Content>
-                        <List.Header as='a'><Link to={"/projects/" + pj.pjId}>{pj.pjName}</ Link></List.Header>
-                        <List.Description as='a'>Updated 10 mins ago</List.Description>
-                    </List.Content>
-                </List.Item>
-            ))}
-    </List>
-    )
+
+export default class Home extends React.Component {
+    static getStores() {
+        return [ProjectStore];
+    }
+    
+    static calculateState(prevState) {
+        return {
+            project: ProjectStore.getState()
+        };
+    }
+
+    componentDidMount() {
+        fetchTitle();
+    }
+    
+    render() {
+        return(
+                <List divided relaxed>
+                {this.state.project.map((pj) => (
+                    <List.Item key={pj.pjId}>
+                        <List.Icon name='tasks' size='large' verticalAlign='middle' />
+                        <List.Content>
+                            <List.Header as='a'><Link to={"/projects/" + pj.pjId}>{pj.pjName}</ Link></List.Header>
+                            <List.Description as='a'>Updated 10 mins ago</List.Description>
+                        </List.Content>
+                    </List.Item>
+                ))}
+                </List> 
+        );
+    }
+
 }
-
-export default ({ project }) => (
-    <div>
-        <Header />
-        <ActionShowProjects project={project} />
-        <ul>
-            <li>TODO プロジェクトのデータを保持するStoreを作る</li>
-            <li>TODO プロジェクトの一覧を表示する</li>
-            <li>TODO プロジェクト詳細へリンクする</li>
-        </ul>
-    </div>
-);
