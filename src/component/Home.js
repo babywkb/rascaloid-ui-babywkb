@@ -1,10 +1,9 @@
-import React from 'react';
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { List } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
-import ProjectStore from '../store/ProjectStore';
+import ProjectStore from '../store/ProjectStore'
 import {fetchTitle} from '../actions'
-
 
 
 export default class Home extends React.Component {
@@ -26,11 +25,11 @@ export default class Home extends React.Component {
         return(
                 <List divided relaxed>
                 {this.state.project.map((pj) => (
-                    <List.Item key={pj.pjId}>
+                    <List.Item key={pj.id}>
                         <List.Icon name='tasks' size='large' verticalAlign='middle' />
                         <List.Content>
-                            <List.Header as='a'><Link to={"/projects/" + pj.pjId}>{pj.pjName}</ Link></List.Header>
-                            <List.Description as='a'>Updated 10 mins ago</List.Description>
+                            <List.Header as='a'><Link to={"/projects/" + pj.id}>{pj.name}</ Link></List.Header>
+                            <List.Description as='a'>{pj.description}</List.Description>
                         </List.Content>
                     </List.Item>
                 ))}
