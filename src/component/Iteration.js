@@ -3,7 +3,6 @@ import {
     List,
     Button,
     Card,
-    Icon,
     Grid,
     Segment,
     Header,
@@ -13,6 +12,7 @@ import {
 } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import {updateTaskDescription} from '../actions'
+import StoryListStore from '../store/StoryListStore';
 
 const TaskEditor = ({storyList, story, task}) => {
     return (
@@ -65,42 +65,93 @@ const TaskComponent = ({storyList, story, condition}) => (
     </Card.Group>
 )
 
-const StoryComponent = ({storyList}) => (
-    <Segment>
-        <List divided relaxed>
-            {storyList.list.map((story) => (
-                <List.Item key={story.storyId}>
-                    <List.Content>
-                        <List.Header>StoryTitle【{story.title}】</List.Header>
-                        <Grid columns={3} divided>
-                            <Grid.Row>
-                                <Grid.Column>
-                                    TODO
-                                    <TaskComponent storyList={storyList} story={story} condition='todo'/>
-                                </Grid.Column>
-                                <Grid.Column>
-                                    DOING
-                                    <TaskComponent storyList={storyList} story={story} condition='doing'/>
-                                </Grid.Column>
-                                <Grid.Column>
-                                    DONE
-                                    <TaskComponent storyList={storyList} story={story} condition='done'/>
-                                </Grid.Column>
-                            </Grid.Row>
-                        </Grid>
-                    </List.Content>
-                </List.Item>
-            ))}
-        </List>
-    </Segment>
-)
+// const StoryComponent = ({storyList}) => (
+//     <Segment>
+//         <List divided relaxed>
+//             {storyList.list.map((story) => (
+//                 <List.Item key={story.storyId}>
+//                     <List.Content>
+//                         <List.Header>StoryTitle【{story.title}】</List.Header>
+//                         <Grid columns={3} divided>
+//                             <Grid.Row>
+//                                 <Grid.Column>
+//                                     TODO
+//                                     <TaskComponent storyList={storyList} story={story} condition='todo'/>
+//                                 </Grid.Column>
+//                                 <Grid.Column>
+//                                     DOING
+//                                     <TaskComponent storyList={storyList} story={story} condition='doing'/>
+//                                 </Grid.Column>
+//                                 <Grid.Column>
+//                                     DONE
+//                                     <TaskComponent storyList={storyList} story={story} condition='done'/>
+//                                 </Grid.Column>
+//                             </Grid.Row>
+//                         </Grid>
+//                     </List.Content>
+//                 </List.Item>
+//             ))}
+//         </List>
+//     </Segment>
+// )
 
-export default({projectId, iterationId, storyList}) => (
-    <div>
-        <h1>
-            <Icon name='wait' size='large'/>
-            Iteration {iterationId}
-            (Project {projectId})</h1>
-        <StoryComponent storyList={storyList}/>
-    </div>
-);
+// export default({projectId, iterationId, storyList}) => (
+//     <div>
+//         <h1>
+//             <Icon name='wait' size='large'/>
+//             Iteration {iterationId}
+//             (Project {projectId})</h1>
+//         <StoryComponent storyList={storyList}/>
+//     </div>
+// );
+
+export default class Home extends React.Component {
+    static getStores() {
+        return [StoryListStore];
+    }
+    
+    static calculateState = (prevState, { match: { params: { projectId, iterationId } } }) => {
+        return {
+            projectId,
+            iterationId,
+            storyList: StoryListStore.getState(),
+        };
+    };
+
+    componentDidMount() {
+        //fetchStories(this.state.projectId);
+    }
+
+    render() {
+        return(
+            <Segment>
+            <List divided relaxed>
+                {this.state.storyList.list.map((story) => (
+                    <List.Item key={story.storyId}>
+                        <List.Content>
+                            <List.Header>StoryTitle【{story.title}】</List.Header>
+                            <Grid columns={3} divided>
+                                <Grid.Row>
+                                    <Grid.Column>
+                                        TODO
+                                        <TaskComponent storyList={this.state.storyList} story={story} condition='todo'/>
+                                    </Grid.Column>
+                                    <Grid.Column>
+                                        DOING
+                                        <TaskComponent storyList={this.state.storyList} story={story} condition='doing'/>
+                                    </Grid.Column>
+                                    <Grid.Column>
+                                        DONE
+                                        <TaskComponent storyList={this.state.storyList} story={story} condition='done'/>
+                                    </Grid.Column>
+                                </Grid.Row>
+                            </Grid>
+                        </List.Content>
+                    </List.Item>
+                ))}
+            </List>
+        </Segment>
+        );
+    }
+
+}

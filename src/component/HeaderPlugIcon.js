@@ -1,7 +1,7 @@
 import React from 'react'
 import { Header, Icon } from 'semantic-ui-react'
 
-const HeaderExamplePlugIcon = () => (
+const HeaderPlugIcon = () => (
   <Header as='h2'>
     <Icon name='hand peace' />
     <Header.Content>
@@ -10,4 +10,4 @@ const HeaderExamplePlugIcon = () => (
   </Header>
 )
 
-export default HeaderExamplePlugIcon
+export default HeaderPlugIcon

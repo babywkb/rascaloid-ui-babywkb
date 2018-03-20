@@ -10,7 +10,7 @@ export const updateTaskDescription = (story,task,taskDescription) => {
 };
 
 export const fetchProjects = event => {
-    let projects = [{pjId:1,pjName:'didMount通ったよ'}];
+    let projects = [];
 
     axiosBase.get('/projects')
     .then(response => {
@@ -23,7 +23,7 @@ export const fetchProjects = event => {
 };
 
 export const fetchIterations = id => {
-    let iterations = [{id: 1,subject: "hoge",description: "hoge",startOn: "hoge",endOn: "hoge"}];
+    let iterations = [];
     
     axiosBase.get('/project/' + id + '/iterations')
     .then(response => {
@@ -35,3 +35,15 @@ export const fetchIterations = id => {
     })
 };
 
+export const fetchStories = id => {
+    let stories = [];
+    
+    axiosBase.get('/project/' + id + '/stories')
+    .then(response => {
+        stories = response.data
+        RascaloidDispatcher.dispatch({
+            type: ActionTypes.FETCH_STORIES,
+            payload: {stories}
+        });
+    })
+};

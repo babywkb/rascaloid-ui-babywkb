@@ -4,7 +4,7 @@ import { List } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import ProjectStore from '../store/ProjectStore'
 import {fetchProjects} from '../actions'
-
+import HeaderPlugIcon from './HeaderPlugIcon'
 
 export default class Home extends React.Component {
     static getStores() {
@@ -23,6 +23,8 @@ export default class Home extends React.Component {
 
     render() {
         return(
+            <div>
+                <HeaderPlugIcon />
                 <List divided relaxed>
                 {this.state.project.map((pj) => (
                     <List.Item key={pj.id}>
@@ -34,6 +36,7 @@ export default class Home extends React.Component {
                     </List.Item>
                 ))}
                 </List> 
+            </div>
         );
     }
 }
