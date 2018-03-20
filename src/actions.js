@@ -25,7 +25,7 @@ export const fetchProjects = event => {
 export const fetchIterations = id => {
     let iterations = [{id: 1,subject: "hoge",description: "hoge",startOn: "hoge",endOn: "hoge"}];
     
-    axiosBase.get('/project/1/stories')
+    axiosBase.get('/project/' + id + '/iterations')
     .then(response => {
         iterations = response.data
         RascaloidDispatcher.dispatch({
