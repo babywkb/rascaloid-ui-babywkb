@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { List } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import ProjectStore from '../store/ProjectStore'
-import {fetchTitle} from '../actions'
+import {fetchProjects} from '../actions'
 
 
 export default class Home extends React.Component {
@@ -18,7 +18,7 @@ export default class Home extends React.Component {
     }
 
     componentDidMount() {
-        fetchTitle();
+        fetchProjects();
     }
 
     render() {
@@ -36,5 +36,4 @@ export default class Home extends React.Component {
                 </List> 
         );
     }
-
 }

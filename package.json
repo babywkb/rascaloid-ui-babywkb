@@ -23,6 +23,9 @@
   "proxy": {
     "/projects": {
       "target": "http://localhost:3000"
+    },
+    "/project/1/iterations": {
+      "target": "http://localhost:3000"
     }
   }
 }

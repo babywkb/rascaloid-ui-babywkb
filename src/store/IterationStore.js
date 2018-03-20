@@ -1,17 +1,17 @@
 import { ReduceStore } from 'flux/utils';
 import RascaloidDispatcher from '../dispatcher';
-
-//日付取ってみたかっただけ
-let dateTimeStart = new Date(2017,1,15,22,30);
-let dateTimeEnd = new Date(2018,9,15,22,30);
+import ActionTypes from '../action-types';
 
 class IterationStore extends ReduceStore {
     getInitialState() {
-        //たぶんここもサーバサイドとやり取りしなきゃなと思う
-        return [{iterationId:1,iterationStartDate:dateTimeStart,iterationEndDate:dateTimeEnd},{iterationId:2,iterateStartDate:dateTimeStart,iterateEndDate:dateTimeEnd}];
+        return [{id: 1,subject: "初期値",description: "説明初期値",startOn: "開始日初期値",endOn: "終了日初期値"},{id: 2,subject: "初期値2",description: "説明初期値2",startOn: "開始日初期値2",endOn: "終了日初期値2"}];
     }
     reduce(state, { type, payload }) {
         switch (type) {
+            case ActionTypes.FETCH_ITERATIONS: {
+                const { iterations } = payload;
+                return iterations;
+            }
             default:
                 return state;
         }

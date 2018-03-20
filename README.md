@@ -14,6 +14,7 @@ http://localhost:3000/projects/1/iterations/1
 
 【課題2】  
 タスク編集フォームの値を編集したら即時Task.descriptionの値が変更されてしまう。onChangeでは画面に出てるvalueだけ変わって欲しくて、onKeyPressでTask.descriptionの値を変えたいのに...  
+Form用のStoreを作れば解決するはず  
 
 【課題3】
 Iteration.jsの中で値をバケツリレーしてて読みにくいし、修正もしにくい...。しかし、解消方法がわからない。

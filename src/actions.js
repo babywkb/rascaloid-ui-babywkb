@@ -9,9 +9,9 @@ export const updateTaskDescription = (story,task,taskDescription) => {
     });
 };
 
-export const fetchTitle = event => {
+export const fetchProjects = event => {
     let projects = [{pjId:1,pjName:'didMount通ったよ'}];
-    
+
     axiosBase.get('/projects')
     .then(response => {
         projects = response.data
@@ -21,3 +21,17 @@ export const fetchTitle = event => {
         });
     })
 };
+
+export const fetchIterations = id => {
+    let iterations = [{id: 1,subject: "hoge",description: "hoge",startOn: "hoge",endOn: "hoge"}];
+    
+    axiosBase.get('/project/1/stories')
+    .then(response => {
+        iterations = response.data
+        RascaloidDispatcher.dispatch({
+            type: ActionTypes.FETCH_ITERATIONS,
+            payload: {iterations}
+        });
+    })
+};
+
