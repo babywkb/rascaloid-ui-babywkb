@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import { List } from 'semantic-ui-react'
-import HeaderExamplePlugIcon from './HeaderExamplePlugIcon'
+import Header from './Header'
 import 'semantic-ui-css/semantic.min.css'
 
 
@@ -21,7 +21,7 @@ const ActionShowIterates = ({ iteration,projectId }) => (
 
 export default ({ projectId,iteration }) => (
     <div>
-        <HeaderExamplePlugIcon />
+        <Header />
         <ActionShowIterates iteration={iteration} projectId={projectId}/>
         <ul>
             <li>TODO イテレーションのデータを保持するStoreを作る</li>
