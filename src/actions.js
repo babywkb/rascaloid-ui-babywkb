@@ -1,7 +1,7 @@
 import RascaloidDispatcher from './dispatcher';
 import ActionTypes from './action-types';
 import axiosBase from './axiosBase'
-import { StoryList, Story } from './models';
+import { StoryList, Story, TaskList, Task } from './models';
 import axios from 'axios';
 
 export const updateTaskDescription = (story,task,taskDescription) => {
@@ -38,36 +38,54 @@ export const fetchIterations = id => {
 };
 
 export const fetchStoryList = id => {
-    let stories = [];
-    let tasks = [];
+    let storyList = StoryList.empty();
+    let taskList = TaskList.empty();
     let taskStatuses = [];
     
-    //並列になっているものは順不同で処理される注意
+    //Be carefull this scope is Parallel processing
     axios.all(
-        //ストーリー一覧取得
+        //makeStoryList
         axiosBase.get('/project/' + id + '/stories') 
         .then(response => {
-            stories = response.data;
+            response.data.map(story => {
+                storyList.add(
+                    Story.create(
+                        story.id,
+                        story.subject,
+                        story.point,
+                        TaskList.empty())
+                )
+            })
+            
         })
-        //タスク一覧取得
-        .then(stories => {
-            stories.map(story =>
-                axiosBase.get('/story/' + story.id)
+        //make TaskList
+        .then(storyList => {
+            storyList.map(story =>
+                axiosBase.get('/story/' + story.id + '/tasks')
                 .then(response => {
-                    tasks = response.data;
+                    response.data.map(task => {
+                        taskList.add(
+                            Task.create(
+                                task.id,
+                                task.subject,
+                                task.description,
+                                task.estimatedHours,
+                                task.status
+                            )
+                        )
+                    })
                 })
             )
         }),
-        //タスクステータス取得
+        //get taskStatuses(but nver used still now...)
         axiosBase.get('/taskStatus')
         .then(response => {
             taskStatuses = response.data;
         }) 
     )
 
-
     RascaloidDispatcher.dispatch({
         type: ActionTypes.FETCH_STORY_LIST,
-        payload: {}
+        payload: { storyList }
     });
 };
