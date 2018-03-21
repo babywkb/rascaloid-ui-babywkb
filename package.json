@@ -21,7 +21,7 @@
   },
   
   "proxy": {
-    "/projects*": {
+    "/*": {
       "target": "http://localhost:3000"
     }
   }

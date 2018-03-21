@@ -12,7 +12,8 @@ import {
     Checkbox
 } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
-import {updateTaskDescription} from '../actions'
+import {updateTaskDescription, fetchStoryList} from '../actions'
+import StoryListStore from '../store/StoryListStore';
 
 const TaskEditor = ({storyList, story, task}) => {
     return (
@@ -95,12 +96,43 @@ const StoryComponent = ({storyList}) => (
     </Segment>
 )
 
-export default({projectId, iterationId, storyList}) => (
-    <div>
-        <h1>
-            <Icon name='wait' size='large'/>
-            Iteration {iterationId}
-            (Project {projectId})</h1>
-        <StoryComponent storyList={storyList}/>
-    </div>
-);
+// export default({projectId, iterationId, storyList}) => (
+//     <div>
+//         <h1>
+//             <Icon name='wait' size='large'/>
+//             Iteration {iterationId}
+//             (Project {projectId})</h1>
+//         <StoryComponent storyList={storyList}/>
+//     </div>
+// );
+
+export default class Iteration extends React.Component {
+    static getStores() {
+        return [StoryListStore];
+    }
+    
+    static calculateState = (prevState, { match: { params: { projectId, iterationId } } }) => {
+        return {
+            projectId,
+            iterationId,
+            storyList: StoryListStore.getState(),
+        };
+    };
+
+    componentDidMount() {
+        fetchStoryList(this.state.projectId);
+    }
+
+    render() {
+        return(
+            <div>
+                <h1>
+                    <Icon name='wait' size='large'/>
+                    Iteration {this.state.iterationId}
+                    (Project {this.state.projectId})
+                </h1>
+                <StoryComponent storyList={this.state.storyList}/>
+            </div>
+        );
+    }
+}

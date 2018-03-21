@@ -1,19 +1,27 @@
 class Task {
-    constructor(taskId, condition, title, description) {
-        this.taskId = taskId;
-        this.condition = condition;
-        this.title = title;
+    constructor(id, subject, description, estimatedHours, status) {
+        this.id = id;
+        this.subject = subject;
         this.description = description;
+        this.estimatedHours = estimatedHours;
+        this.status = status;
     }
-    setCondition(condition) {
-        return new Task(this.taskId,condition,this.title,this.description);
+
+    static create(id, subject, description, estimatedHours, status) {
+        return new Task(id, subject, description, estimatedHours, status);
+    }
+
+    setSubject(subject) {
+        return new Task(this.taskId,subject,this.description,this.estimatedHours, this.status);
     }
     setDescription(description) {
-        return new Task(this.taskId,this.condition,this.title,description);
+        return new Task(this.taskId,this.subject,description,this.estimatedHours, this.status);
     }
-    static idGenerator = 0;
-    static create(title,description) {
-        return new Task(++Task.idGenerator, 'todo', title, description);
+    setEstimatedHours(estimatedHours) {
+        return new Task(this.taskId,this.subject,this.description,estimatedHours, this.status);
+    }
+    setStatus(status) {
+        return new Task(this.taskId,this.subject,this.description,this.estimatedHours, status);
     }
 }
 
@@ -27,17 +35,17 @@ class TaskList {
     add(task) {
         return new TaskList([task, ...this.list]);
     }
-    setTaskCondition(taskId, condition) {
+    setTaskStatus(id, status) {
         return new TaskList(this.list.map(task => {
-            if (task.taskId === taskId) {
-                return task.setCondition(condition);
+            if (task.id === id) {
+                return task.setStatus(status);
             }
             return task;
         }));
     }
-    setTaskDescription(taskId, description) {
+    setTaskDescription(id, description) {
         return new TaskList(this.list.map(task => {
-            if (task.taskId === taskId) {
+            if (task.id === id) {
                 return task.setDescription(description);
             }
             return task;
@@ -46,20 +54,21 @@ class TaskList {
 }
 
 class Story {
-    constructor(storyId, title, taskList) {
-        this.storyId = storyId;
-        this.title = title;
+    constructor(id, subject, point, taskList) {
+        this.id = id;
+        this.subject = subject;
+        this.point = point;
         this.taskList = taskList;
     }
     static idGenerator = 0;
-    static create(title,taskList) {
-        return new Story(++Story.idGenerator, title, taskList);
+    static create(id,subject,point,taskList) {
+        return new Story(id, subject, point, taskList);
     }
-    setTitle(title) {
-        return new Story(this.storyId,title, this.taskList);
+    setSubject(subject) {
+        return new Story(this.storyId, subject, this.point, this.taskList);
     }
     setTaskList(taskList) {
-        return new Story(this.id, this.title, taskList);
+        return new Story(this.id, this.subject, this.point, taskList);
     }
 }
 
@@ -73,17 +82,17 @@ class StoryList {
     add(story) {
         return new StoryList([story, ...this.list]);
     }
-    setStoryTitle(storyId, title) {
+    setSubject(id, subject) {
         return new StoryList(this.list.map(story => {
-            if (story.storyId === storyId) {
-                return story.setTitle(title);
+            if (story.id === id) {
+                return story.setSubject(subject);
             }
             return story;
         }));
     }
-    setStoryTaskList(storyId, taskList) {
+    setTaskList(id, taskList) {
         return new StoryList(this.list.map(story => {
-            if (story.storyId === storyId) {
+            if (story.id === id) {
                 return story.setTaskList(taskList);
             }
             return story;
