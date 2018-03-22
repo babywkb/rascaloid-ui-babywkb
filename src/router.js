@@ -9,7 +9,7 @@ import {fetchProjects} from './actions'
 export default () => (
     <BrowserRouter>
         <div>
-            <Route exact path="/" component={HomeContainer} onEnter={fetchProjects} />
+            <Route exact path="/" component={HomeContainer} />
             <Route exact path="/projects/:projectId" component={ProjectContainer} />
             <Route exact path="/projects/:projectId/iterations/:iterationId" component={IterationContainer} />
         </div>
