@@ -42,8 +42,8 @@ export const fetchStoryList = id => {
     let taskList = TaskList.empty();
     let taskStatuses = [];
     
-    //Be carefull this scope is Parallel processing
-    //axios.all(
+    //Be carefull this Block is Parallel processing
+    axios.all(
         //makeStoryList
         axiosBase.get('/project/' + id + '/stories') 
         .then(response => {
@@ -81,7 +81,7 @@ export const fetchStoryList = id => {
         .then(response => {
             taskStatuses = response.data;
         }) 
-    // )
+    )
 
     RascaloidDispatcher.dispatch({
         type: ActionTypes.FETCH_STORY_LIST,

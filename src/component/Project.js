@@ -24,6 +24,7 @@ export default class Home extends React.Component {
 
     render() {
         return(
+            <div>
             <List divided relaxed>
             {this.state.iteration.map((itr) => (
                 <List.Item key={itr.id}>
@@ -36,30 +37,8 @@ export default class Home extends React.Component {
                 </List.Item>
             ))}
         </List>  
+        </div>
         );
     }
 
 }
-
-
-
-// const ActionShowIterates = ({ iteration,projectId }) => (
-//     <List divided relaxed>
-//         {iteration.map((itr) => (
-//             <List.Item key={itr.iterationId}>
-//                 <List.Icon name='wait' size='large' verticalAlign='middle' />
-//                 <List.Content>
-//                     <List.Header as='a'><Link to={'/projects/' + projectId + '/iterations/' + itr.iterationId}>IterationNo.{itr.iterationId}</ Link></List.Header>
-//                     <List.Description as='a'>日付出したい</List.Description>
-//                 </List.Content>
-//             </List.Item>
-//         ))}
-//     </List>
-// )
-
-// export default ({ projectId,iteration }) => (
-//     <div>
-//         <Header />
-//         <ActionShowIterates iteration={iteration} projectId={projectId}/>
-//     </div>
-// );

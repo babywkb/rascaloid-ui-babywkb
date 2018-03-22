@@ -96,16 +96,6 @@ const StoryComponent = ({storyList}) => (
     </Segment>
 )
 
-// export default({projectId, iterationId, storyList}) => (
-//     <div>
-//         <h1>
-//             <Icon name='wait' size='large'/>
-//             Iteration {iterationId}
-//             (Project {projectId})</h1>
-//         <StoryComponent storyList={storyList}/>
-//     </div>
-// );
-
 export default class Iteration extends React.Component {
     static getStores() {
         return [StoryListStore];
