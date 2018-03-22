@@ -12,7 +12,7 @@ export const updateTaskDescription = (story,task,taskDescription) => {
 };
 
 export const fetchProjects = event => {
-    let projects = [{pjId:1,pjName:'didMount通ったよ'}];
+    let projects = [];
 
     axiosBase.get('/projects')
     .then(response => {
@@ -25,7 +25,7 @@ export const fetchProjects = event => {
 };
 
 export const fetchIterations = id => {
-    let iterations = [{id: 1,subject: "hoge",description: "hoge",startOn: "hoge",endOn: "hoge"}];
+    let iterations = [];
     
     axiosBase.get('/project/' + id + '/iterations')
     .then(response => {
@@ -43,7 +43,7 @@ export const fetchStoryList = id => {
     let taskStatuses = [];
     
     //Be carefull this scope is Parallel processing
-    axios.all(
+    //axios.all(
         //makeStoryList
         axiosBase.get('/project/' + id + '/stories') 
         .then(response => {
@@ -56,7 +56,6 @@ export const fetchStoryList = id => {
                         TaskList.empty())
                 )
             })
-            
         })
         //make TaskList
         .then(storyList => {
@@ -82,7 +81,7 @@ export const fetchStoryList = id => {
         .then(response => {
             taskStatuses = response.data;
         }) 
-    )
+    // )
 
     RascaloidDispatcher.dispatch({
         type: ActionTypes.FETCH_STORY_LIST,

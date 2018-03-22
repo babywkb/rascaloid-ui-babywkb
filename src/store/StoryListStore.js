@@ -13,14 +13,17 @@ class StoryListStore extends ReduceStore {
     }
     reduce(state, {type, payload}) {
         switch (type) {
-            case ActionTypes.SET_DESCRIPTION:
-                {
+            case ActionTypes.SET_DESCRIPTION:{
                     const {story,task,taskDescription} = payload;
                     const storyId = story.storyId
                     const taskId = task.taskId 
                     const taskList = story.taskList.setTaskDescription(taskId ,taskDescription);
                     return state.setStoryTaskList(storyId,taskList);
-                }
+            }
+            case ActionTypes.FETCH_STORY_LIST: {
+                const { storyList } = payload;
+                return storyList;
+            }
             default:
                 return state;
         }

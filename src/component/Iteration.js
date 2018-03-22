@@ -43,13 +43,13 @@ const TaskEditor = ({storyList, story, task}) => {
     )
 }
 
-const TaskComponent = ({storyList, story, condition}) => (
+const TaskComponent = ({storyList, story, statusId}) => (
     <Card.Group>
-        {story.taskList.list.filter((task) => task.condition === condition).map(task => (
-            <Card key={task.taskId}>
+        {story.taskList.list.filter((task) => task.status.id === statusId).map(task => (
+            <Card key={task.id}>
                 <Card.Content>
                     <Card.Header>
-                        TaskTitle{task.title}
+                        TaskSubject{task.subject}
                     </Card.Header>
                     <Card.Meta></Card.Meta>
                     <Card.Description>
@@ -70,22 +70,22 @@ const StoryComponent = ({storyList}) => (
     <Segment>
         <List divided relaxed>
             {storyList.list.map((story) => (
-                <List.Item key={story.storyId}>
+                <List.Item key={story.id}>
                     <List.Content>
-                        <List.Header>StoryTitle【{story.title}】</List.Header>
+                        <List.Header>StorySubject【{story.subject}】</List.Header>
                         <Grid columns={3} divided>
                             <Grid.Row>
                                 <Grid.Column>
                                     TODO
-                                    <TaskComponent storyList={storyList} story={story} condition='todo'/>
+                                    <TaskComponent storyList={storyList} story={story} statusId='1'/>
                                 </Grid.Column>
                                 <Grid.Column>
                                     DOING
-                                    <TaskComponent storyList={storyList} story={story} condition='doing'/>
+                                    <TaskComponent storyList={storyList} story={story} statusId='2'/>
                                 </Grid.Column>
                                 <Grid.Column>
                                     DONE
-                                    <TaskComponent storyList={storyList} story={story} condition='done'/>
+                                    <TaskComponent storyList={storyList} story={story} statusId='3'/>
                                 </Grid.Column>
                             </Grid.Row>
                         </Grid>
