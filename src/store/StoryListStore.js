@@ -6,10 +6,10 @@ import {Story, Task, TaskList, StoryList} from '../models';
 class StoryListStore extends ReduceStore {
     getInitialState() {
         return StoryList.empty().add(
-            Story.create('ストーリーのタイトル', 
+            Story.create(1,'ストーリーのサブジェクト初期値１',3, 
                 TaskList.empty()
-                .add(Task.create('タスクのタイトル１','タスク詳細'))
-                .add(Task.create('タスクのタイトル２','タスク詳細'))));
+                .add(Task.create(1,'タスクのサブジェクト初期値１','タスク詳細',5, {"id": 1}))
+                ));
     }
     reduce(state, {type, payload}) {
         switch (type) {
