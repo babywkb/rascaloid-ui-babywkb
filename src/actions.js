@@ -17,27 +17,27 @@ export const updateTaskDescription = (story, task, taskDescription) => {
 export const fetchProjects = event => {
     let projects = [];
 
-    axiosBase
-        .get('/projects')
-        .then(response => {
-            projects = response.data
-            RascaloidDispatcher.dispatch({type: ActionTypes.FETCH_TITLE, payload: {
-                    projects
-                }});
-        })
+    axiosBase.get('/projects')
+    .then(response => {
+        projects = response.data
+        RascaloidDispatcher.dispatch({
+            type: ActionTypes.FETCH_TITLE,
+            payload: {projects}
+        });
+    })
 };
 
 export const fetchIterations = id => {
     let iterations = [];
 
-    axiosBase
-        .get('/project/' + id + '/iterations')
-        .then(response => {
-            iterations = response.data
-            RascaloidDispatcher.dispatch({type: ActionTypes.FETCH_ITERATIONS, payload: {
-                    iterations
-                }});
-        })
+    axiosBase.get('/project/' + id + '/iterations')
+    .then(response => {
+        iterations = response.data
+        RascaloidDispatcher.dispatch({
+            type: ActionTypes.FETCH_ITERATIONS,
+            payload: {iterations}
+        });
+    })
 };
 
 export const fetchStoryList = id => {
@@ -54,25 +54,27 @@ export const fetchStoryList = id => {
                 taskList
             ))
         })
-    })
-    .then(
-        storyList.forEach(story => {
+
+        storyList.list.forEach(story => {
             axiosBase.get('/story/' + story.id + '/tasks')
             .then(resp => {
                 story.setTaskList(
                     resp.data.forEach(task => (
-                        taskList.add(Task.create(task.id, task.subject, task.description, task.estimatedHours, task.status))
+                        taskList = taskList.add(Task.create(
+                            task.id,
+                            task.subject,
+                            task.description,
+                            task.estimatedHours,
+                            task.status
+                        ))
                     ))
                 )
             })
         })
-    )
-    .then(storyList =>
-        RascaloidDispatcher.dispatch(
-            {
+
+        RascaloidDispatcher.dispatch({
             type: ActionTypes.FETCH_STORY_LIST,
             payload: {storyList}
-            }
-        )
-    )
+        })
+    })
 };

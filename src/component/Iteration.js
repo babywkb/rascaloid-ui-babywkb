@@ -65,7 +65,7 @@ const TaskComponent = ({storyList, story, statusId}) => (
                         </Card.Description>
                     </Card.Content>
                     <Card.Content extra>
-                        <div className='ui two buttons'>
+                        <div className='ui button'>
                             <TaskEditor task={task} storyList={storyList} story={story}/>
                         </div>
                     </Card.Content>
