@@ -44,37 +44,37 @@ export const fetchStoryList = id => {
     let storyList = StoryList.empty();
     let taskList = TaskList.empty();
 
+    
     axiosBase.get('/project/' + id + '/stories')
-    .then(response => {
-        response.data.forEach(story => {
-            storyList = storyList.add(Story.create(
-                story.id,
-                story.subject,
-                story.point,
-                taskList
-            ))
-        })
-
-        storyList.list.forEach(story => {
-            axiosBase.get('/story/' + story.id + '/tasks')
-            .then(resp => {
-                story.setTaskList(
-                    resp.data.forEach(task => (
-                        taskList = taskList.add(Task.create(
-                            task.id,
-                            task.subject,
-                            task.description,
-                            task.estimatedHours,
-                            task.status
-                        ))
-                    ))
+        .then(response => {
+            response.data.forEach(story => {
+                storyList = storyList.add(
+                    Story.create(
+                        story.id,
+                        story.subject,
+                        story.point,
+                        taskList
+                    )
                 )
             })
+            // RascaloidDispatcher.dispatch({
+            //     type: ActionTypes.FETCH_STORY_LIST,
+            //     payload: {storyList}
+            // })
         })
-
-        RascaloidDispatcher.dispatch({
-            type: ActionTypes.FETCH_STORY_LIST,
-            payload: {storyList}
-        })
-    })
-};
+        .then(() => {storyList.list.forEach(story => {
+            axiosBase.get('/story/' + story.id + '/tasks')
+            .then(resp => {
+                resp.data.forEach(task => (
+                taskList = taskList.add(Task.create(
+                    task.id,
+                    task.subject,
+                    task.description,
+                    task.estimatedHours,
+                    task.status
+                    ))
+                ))           
+            })
+        })})
+        .then(() => {storyList.list.map(story => (story.setTaskList(taskList)))})
+}
