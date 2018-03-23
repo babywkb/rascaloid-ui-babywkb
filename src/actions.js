@@ -44,24 +44,35 @@ export const fetchStoryList = id => {
     let storyList = StoryList.empty();
     let taskList = TaskList.empty();
 
-    //Be carefull this Block is Parallel processing makeStoryList
-    axiosBase
-        .get('/project/' + id + '/stories')
-        .then(response => {
-            storyList = response
-                .data
-                .map(story => {
-                    return storyList.add(Story.create(story.id, story.subject, story.point, TaskList.empty()))
-                })
-                .map(story => axiosBase.get('/story/' + story.id + '/tasks').then(resp => {
-                    resp
-                        .data
-                        .map(task => {
-                            taskList.add(Task.create(task.id, task.subject, task.description, task.estimatedHours, task.status))
-                        })
-                }))
-            RascaloidDispatcher.dispatch({type: ActionTypes.FETCH_STORY_LIST, payload: {
-                    storyList
-                }})
+    axiosBase.get('/project/' + id + '/stories')
+    .then(response => {
+        response.data.forEach(story => {
+            storyList = storyList.add(Story.create(
+                story.id,
+                story.subject,
+                story.point,
+                taskList
+            ))
         })
+    })
+    .then(
+        storyList.forEach(story => {
+            axiosBase.get('/story/' + story.id + '/tasks')
+            .then(resp => {
+                story.setTaskList(
+                    resp.data.forEach(task => (
+                        taskList.add(Task.create(task.id, task.subject, task.description, task.estimatedHours, task.status))
+                    ))
+                )
+            })
+        })
+    )
+    .then(storyList =>
+        RascaloidDispatcher.dispatch(
+            {
+            type: ActionTypes.FETCH_STORY_LIST,
+            payload: {storyList}
+            }
+        )
+    )
 };
