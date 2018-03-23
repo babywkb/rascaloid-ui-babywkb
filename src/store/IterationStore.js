@@ -4,7 +4,7 @@ import ActionTypes from '../action-types';
 
 class IterationStore extends ReduceStore {
     getInitialState() {
-        return [{id: 1,subject: "初期値",description: "説明初期値",startOn: "開始日初期値",endOn: "終了日初期値"},{id: 2,subject: "初期値2",description: "説明初期値2",startOn: "開始日初期値2",endOn: "終了日初期値2"}];
+        return [{id: 1,subject: "初期値",description: "説明初期値",startOn: "開始日初期値",endOn: "終了日初期値"}];
     }
     reduce(state, { type, payload }) {
         switch (type) {

@@ -6,9 +6,9 @@ import {Story, Task, TaskList, StoryList} from '../models';
 class StoryListStore extends ReduceStore {
     getInitialState() {
         return StoryList.empty().add(
-            Story.create(1,'ストーリーのサブジェクト初期値１',3, 
+            Story.create(1,'初期値',3, 
                 TaskList.empty()
-                .add(Task.create(1,'タスクのサブジェクト初期値１','タスク詳細',5, {"id": 1}))
+                .add(Task.create(1,'初期値','初期値',5, "TODO"))
                 ));
     }
     reduce(state, {type, payload}) {
@@ -22,7 +22,7 @@ class StoryListStore extends ReduceStore {
             }
             case ActionTypes.FETCH_STORY_LIST: {
                 const { storyList } = payload;
-                return storyList;
+                return storyList ;
             }
             default:
                 return state;

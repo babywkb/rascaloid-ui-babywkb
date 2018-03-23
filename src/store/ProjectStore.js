@@ -4,7 +4,7 @@ import ActionTypes from '../action-types';
 
 class ProjectStore extends ReduceStore {
     getInitialState() {
-        return [{pjId:1,pjName:'PJ名１'},{pjId:2,pjName:'PJ名２'}];
+        return [{pjId:1,pjName:'初期値'}];
     }
 
     reduce(state, { type, payload }) {

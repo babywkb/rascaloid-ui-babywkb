@@ -17,7 +17,7 @@ import StoryListStore from '../store/StoryListStore';
 
 const TaskEditor = ({storyList, story, task}) => {
     return (
-        <Modal trigger={< Button color = 'green' > 詳細 </Button>}>
+        <Modal trigger={<Button color = 'green' > 詳細 </Button>}>
             <Modal.Header>edit Your Task</Modal.Header>
             <Modal.Content>
                 <Modal.Description>
@@ -47,12 +47,13 @@ const TaskEditor = ({storyList, story, task}) => {
     )
 }
 
-const TaskComponent = ({storyList, story, statusId}) => (
+const TaskComponent = ({storyList, story, statusName}) => (
+    <div>
     <Card.Group>
         {story
             .taskList
             .list
-            .filter((task) => task.status.id === statusId)
+            .filter((task) => task.statusName === statusName)
             .map(task => (
                 <Card key={task.id}>
                     <Card.Content>
@@ -65,16 +66,16 @@ const TaskComponent = ({storyList, story, statusId}) => (
                         </Card.Description>
                     </Card.Content>
                     <Card.Content extra>
-                        <div className='ui button'>
-                            <TaskEditor task={task} storyList={storyList} story={story}/>
-                        </div>
+                        <TaskEditor task={task} storyList={storyList} story={story}/>
                     </Card.Content>
                 </Card>
             ))}
     </Card.Group>
+    </div>
 )
 
 const StoryComponent = ({storyList}) => (
+    <div>
     <Segment>
         <List divided relaxed>
             {storyList
@@ -86,16 +87,16 @@ const StoryComponent = ({storyList}) => (
                             <Grid columns={3} divided>
                                 <Grid.Row>
                                     <Grid.Column>
-                                        TODO
-                                        <TaskComponent storyList={storyList} story={story} statusId='1'/>
+                                        <Header>TODO</Header>
+                                        <TaskComponent storyList={storyList} story={story} statusName="TODO"/>
                                     </Grid.Column>
                                     <Grid.Column>
-                                        DOING
-                                        <TaskComponent storyList={storyList} story={story} statusId='2'/>
+                                        <Header>DOING</Header>
+                                        <TaskComponent storyList={storyList} story={story} statusId="DOING"/>
                                     </Grid.Column>
                                     <Grid.Column>
-                                        DONE
-                                        <TaskComponent storyList={storyList} story={story} statusId='3'/>
+                                        <Header>DONE</Header>
+                                        <TaskComponent storyList={storyList} story={story} statusId="DONE"/>
                                     </Grid.Column>
                                 </Grid.Row>
                             </Grid>
@@ -104,6 +105,7 @@ const StoryComponent = ({storyList}) => (
                 ))}
         </List>
     </Segment>
+    </div>
 )
 
 export default class Iteration extends React.Component {
