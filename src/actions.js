@@ -57,10 +57,6 @@ export const fetchStoryList = id => {
                     )
                 )
             })
-            // RascaloidDispatcher.dispatch({
-            //     type: ActionTypes.FETCH_STORY_LIST,
-            //     payload: {storyList}
-            // })
         })
         .then(() => {storyList.list.forEach(story => {
             axiosBase.get('/story/' + story.id + '/tasks')
@@ -77,4 +73,9 @@ export const fetchStoryList = id => {
             })
         })})
         .then(() => {storyList.list.map(story => (story.setTaskList(taskList)))})
+        .then(() => {RascaloidDispatcher.dispatch({
+                type: ActionTypes.FETCH_STORY_LIST,
+                payload: {storyList}
+            })}
+        )
 }
