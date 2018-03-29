@@ -1,0 +1,38 @@
+server {
+    listen       80;
+    server_name  localhost;
+
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+    }
+
+    location /projects {
+        proxy_pass   ${RASCALOID_URL}/projects;
+    }
+
+    location /project {
+        proxy_pass   ${RASCALOID_URL}/project;
+    }
+
+    location /story {
+        proxy_pass   ${RASCALOID_URL}/story;
+    }
+
+    location /task {
+        proxy_pass   ${RASCALOID_URL}/task;
+    }
+
+    location /iteration {
+        proxy_pass   ${RASCALOID_URL}/iteration;
+    }
+
+    location /taskStatus {
+        proxy_pass   ${RASCALOID_URL}/taskStatus;
+    }
+
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+}
