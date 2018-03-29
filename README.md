@@ -1,25 +1,24 @@
+
+# ビルド
+
+まずJavaScriptをビルドします。
+
 ```console
-npm install
-npm start
+npm run build
+# もしくは yarn build
 ```
 
-うらがみさんのに加えて
-↓の２つのパッケージ追加してます
-semantic-ui-react
-semantic-ui-css
+次にDockerイメージをビルドします。
 
-【課題1】
-http://localhost:3000/projects/1/iterations/1  
-の画面まで行ってタスク詳細の編集はできるが、編集初回の画面の挙動がおかしい
+```console
+docker build -t team-cerezo/takata-roid:latest .
+```
 
-【課題2】  
-タスク編集フォームの値を編集したら即時Task.descriptionの値が変更されてしまう。onChangeでは画面に出てるvalueだけ変わって欲しくて、onKeyPressでTask.descriptionの値を変えたいのに...  
-Form用のStoreを作れば解決するはず  
+# 実行
 
-【課題3】
-Iteration.jsの中で値をバケツリレーしてて読みにくいし、修正もしにくい...。しかし、解消方法がわからない。
+Dockerで実行します。
+（先にrascaloid-apiを起動しておく必要があります）
 
-【課題4】
-Taskの値を編集するたびに  
-StoryListに入ってる、特定のStoryのTaskListの中の、特定のTaskの何のプロパティーを変えるのかを指定しなきゃならんのが辛すぎる  
-(配列の中のオブジェクトの中の配列の中のオブジェクトが持つ値)を変える状態...
+```
+docker run --name=rascaloid-ui -d -p 8080:80 --link rascaloid-api team-cerezo/takata-roid
+```
