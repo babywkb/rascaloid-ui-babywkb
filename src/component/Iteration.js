@@ -9,7 +9,8 @@ import {
     Header,
     Modal,
     Form,
-    Checkbox
+    Checkbox,
+    Container
 } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import {updateTaskDescription, fetchStoryList} from '../actions'
@@ -134,14 +135,14 @@ export default class Iteration extends React.Component {
 
     render() {
         return (
-            <div>
+            <Container className="rascaloid-container">
                 <h1>
                     <Icon name='wait' size='large'/>
                     Iteration {this.state.iterationId}
                     (Project {this.state.projectId})
                 </h1>
                 <StoryComponent storyList={this.state.storyList} />
-            </div>
+            </Container>
         );
     }
 }
