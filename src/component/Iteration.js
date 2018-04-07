@@ -54,7 +54,7 @@ const TaskComponent = ({storyList, story, statusName}) => (
         {story
             .taskList
             .list
-            .filter((task) => task.status === statusName)
+            .filter((task) => task.statusName === statusName)
             .map(task => (
                 <Card key={task.id}>
                     <Card.Content>

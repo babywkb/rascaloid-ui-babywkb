@@ -1,27 +1,27 @@
 class Task {
-    constructor(id, subject, description, estimatedHours, status) {
+    constructor(id, subject, description, estimatedHours, statusName) {
         this.id = id;
         this.subject = subject;
         this.description = description;
         this.estimatedHours = estimatedHours;
-        this.status = status;
+        this.statusName = statusName;
     }
 
-    static create(id, subject, description, estimatedHours, status) {
-        return new Task(id, subject, description, estimatedHours, status);
+    static create(id, subject, description, estimatedHours, statusName) {
+        return new Task(id, subject, description, estimatedHours, statusName);
     }
 
     setSubject(subject) {
-        return new Task(this.taskId,subject,this.description,this.estimatedHours, this.status);
+        return new Task(this.taskId,subject,this.description,this.estimatedHours, this.statusName);
     }
     setDescription(description) {
-        return new Task(this.taskId,this.subject,description,this.estimatedHours, this.status);
+        return new Task(this.taskId,this.subject,description,this.estimatedHours, this.statusName);
     }
     setEstimatedHours(estimatedHours) {
-        return new Task(this.taskId,this.subject,this.description,estimatedHours, this.status);
+        return new Task(this.taskId,this.subject,this.description,estimatedHours, this.statusName);
     }
-    setStatus(status) {
-        return new Task(this.taskId,this.subject,this.description,this.estimatedHours, status);
+    setStatusName(statusName) {
+        return new Task(this.taskId,this.subject,this.description,this.estimatedHours, statusName);
     }
 }
 
