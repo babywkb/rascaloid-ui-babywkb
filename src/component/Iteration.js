@@ -54,7 +54,7 @@ const TaskComponent = ({storyList, story, statusName}) => (
         {story
             .taskList
             .list
-            .filter((task) => task.statusName === statusName)
+            .filter((task) => task.status === statusName)
             .map(task => (
                 <Card key={task.id}>
                     <Card.Content>
@@ -93,11 +93,11 @@ const StoryComponent = ({storyList}) => (
                                     </Grid.Column>
                                     <Grid.Column>
                                         <Header>DOING</Header>
-                                        <TaskComponent storyList={storyList} story={story} statusId="DOING"/>
+                                        <TaskComponent storyList={storyList} story={story} statusName="Doing"/>
                                     </Grid.Column>
                                     <Grid.Column>
                                         <Header>DONE</Header>
-                                        <TaskComponent storyList={storyList} story={story} statusId="DONE"/>
+                                        <TaskComponent storyList={storyList} story={story} statusName="Done"/>
                                     </Grid.Column>
                                 </Grid.Row>
                             </Grid>
